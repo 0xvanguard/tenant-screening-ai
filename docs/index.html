@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 Tenant Screening AI - Verificación de Inquilinos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #fff; line-height: 1.6; }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 70%);
+        }
+        
+        .hero-content { max-width: 800px; }
+        
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 100px;
+            font-size: 14px;
+            color: #ff6b35;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle { font-size: 1.25rem; color: #888; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary { background: linear-gradient(135deg, #ff6b35, #ff8c5a); color: #000; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
+        
+        .stats { display: flex; justify-content: center; gap: 60px; margin-top: 60px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: 800; color: #ff6b35; }
+        .stat-label { font-size: 14px; color: #666; margin-top: 4px; }
+        
+        .features { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 60px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+            border: 1px solid #2a2a4a;
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover { border-color: #ff6b35; transform: translateY(-4px); }
+        .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
+        .feature-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; }
+        .feature-desc { color: #888; font-size: 14px; }
+        
+        .how-it-works { padding: 120px 20px; background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%); }
+        .steps { display: flex; justify-content: center; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
+        .step { text-align: center; flex: 1; min-width: 200px; }
+        .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, #ff6b35, #ff8c5a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: #000; margin: 0 auto 16px; }
+        .step-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+        .step-desc { color: #888; font-size: 14px; }
+        
+        .pricing { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+        
+        .pricing-card { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 16px; padding: 40px; text-align: center; }
+        .pricing-card.popular { border-color: #ff6b35; transform: scale(1.05); }
+        .pricing-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
+        .pricing-price { font-size: 3rem; font-weight: 800; color: #ff6b35; margin: 16px 0; }
+        .pricing-price span { font-size: 1rem; color: #666; font-weight: 400; }
+        .pricing-features { list-style: none; text-align: left; margin: 24px 0; }
+        .pricing-features li { padding: 8px 0; color: #888; font-size: 14px; }
+        .pricing-features li::before { content: '✓'; color: #ff6b35; margin-right: 8px; }
+        
+        .cta-section { padding: 120px 20px; text-align: center; background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%); }
+        .cta-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .cta-subtitle { color: #888; margin-bottom: 40px; }
+        
+        footer { padding: 40px 20px; text-align: center; color: #666; font-size: 14px; border-top: 1px solid #1a1a2e; }
+        footer a { color: #ff6b35; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">🏠 PropTech Tool</span>
+            <h1>Verificación Automática de Inquilinos</h1>
+            <p class="subtitle">Analiza y evalúa inquilinos potenciales en segundos. Reduce riesgos y toma mejores decisiones.</p>
+            <div class="cta-group">
+                <a href="https://0xvanguard.github.io/tenant-screening-ai" class="btn btn-primary">🔍 Probar Ahora</a>
+                <a href="https://github.com/0xvanguard/tenant-screening-ai" class="btn btn-secondary">📁 GitHub</a>
+            </div>
+            <div class="stats">
+                <div class="stat"><div class="stat-value">95%</div><div class="stat-label">Precisión</div></div>
+                <div class="stat"><div class="stat-value">3s</div><div class="stat-label">Tiempo de Análisis</div></div>
+                <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Automático</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">¿Qué analiza?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Ratio Ingreso/Renta</h3>
+                <p class="feature-desc">Calcula automáticamente si el inquilino puede pagar la renta.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏢</div>
+                <h3 class="feature-title">Estabilidad Laboral</h3>
+                <p class="feature-desc">Analiza tipo de empleo, duración y empleador.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚠️</div>
+                <h3 class="feature-title">Red Flags</h3>
+                <p class="feature-desc">Detecta historial de desalojo, crédito bajo, empleo inestable.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3 class="feature-title">Factores Positivos</h3>
+                <p class="feature-desc">Resalta fortalezas del inquilino para la decisión.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3 class="feature-title">Condiciones</h3>
+                <p class="feature-desc">Genera condiciones automáticas de aprobación.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Score de Riesgo</h3>
+                <p class="feature-desc">Puntuación de 0-100 con 4 niveles de riesgo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">¿Cómo funciona?</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Ingresa Datos</h3>
+                <p class="step-desc">Nombre, ingresos, empleo, crédito</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Análisis IA</h3>
+                <p class="step-desc">El algoritmo evalúa en 3 segundos</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Recomendación</h3>
+                <p class="step-desc">Aprobar, revisar o rechazar</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <h2 class="section-title">Planes</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="pricing-name">Starter</h3>
+                <div class="pricing-price">Gratis</div>
+                <ul class="pricing-features">
+                    <li>10 análisis/mes</li>
+                    <li>Análisis básico</li>
+                    <li>Web UI</li>
+                    <li>Open source</li>
+                </ul>
+                <a href="https://github.com/0xvanguard/tenant-screening-ai" class="btn btn-secondary" style="width: 100%; justify-content: center;">Descargar</a>
+            </div>
+            <div class="pricing-card popular">
+                <span class="badge" style="position: absolute; top: -12px; right: 20px;">POPULAR</span>
+                <h3 class="pricing-name">Pro</h3>
+                <div class="pricing-price">$49<span>/mes</span></div>
+                <ul class="pricing-features">
+                    <li>Análisis ilimitados</li>
+                    <li>Reportes PDF</li>
+                    <li>Integración API</li>
+                    <li>Soporte prioritario</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%; justify-content: center;">Empezar Ahora</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title">¿Listo para automatizar?</h2>
+        <p class="cta-subtitle">Ahorra tiempo y reduce riesgos con verificación automática.</p>
+        <a href="https://github.com/0xvanguard/tenant-screening-ai" class="btn btn-primary">🚀 Empezar Ahora</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Tenant Screening AI. Desarrollado por <a href="https://github.com/0xvanguard">0xvanguard</a></p>
+    </footer>
+</body>
+</html>
