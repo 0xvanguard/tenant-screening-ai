@@ -1,243 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏠 Tenant Screening AI - Verificación de Inquilinos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #fff; line-height: 1.6; }
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
-            background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 70%);
-        }
-        
-        .hero-content { max-width: 800px; }
-        
-        .badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 100px;
-            font-size: 14px;
-            color: #ff6b35;
-            margin-bottom: 24px;
-        }
-        
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle { font-size: 1.25rem; color: #888; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        
-        .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary { background: linear-gradient(135deg, #ff6b35, #ff8c5a); color: #000; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4); }
-        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
-        
-        .stats { display: flex; justify-content: center; gap: 60px; margin-top: 60px; flex-wrap: wrap; }
-        .stat { text-align: center; }
-        .stat-value { font-size: 2.5rem; font-weight: 800; color: #ff6b35; }
-        .stat-label { font-size: 14px; color: #666; margin-top: 4px; }
-        
-        .features { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 60px; }
-        
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        
-        .feature-card {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
-            border: 1px solid #2a2a4a;
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover { border-color: #ff6b35; transform: translateY(-4px); }
-        .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-        .feature-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; }
-        .feature-desc { color: #888; font-size: 14px; }
-        
-        .how-it-works { padding: 120px 20px; background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%); }
-        .steps { display: flex; justify-content: center; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
-        .step { text-align: center; flex: 1; min-width: 200px; }
-        .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, #ff6b35, #ff8c5a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: #000; margin: 0 auto 16px; }
-        .step-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
-        .step-desc { color: #888; font-size: 14px; }
-        
-        .pricing { padding: 120px 20px; max-width: 1200px; margin: 0 auto; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
-        
-        .pricing-card { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 16px; padding: 40px; text-align: center; }
-        .pricing-card.popular { border-color: #ff6b35; transform: scale(1.05); }
-        .pricing-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
-        .pricing-price { font-size: 3rem; font-weight: 800; color: #ff6b35; margin: 16px 0; }
-        .pricing-price span { font-size: 1rem; color: #666; font-weight: 400; }
-        .pricing-features { list-style: none; text-align: left; margin: 24px 0; }
-        .pricing-features li { padding: 8px 0; color: #888; font-size: 14px; }
-        .pricing-features li::before { content: '✓'; color: #ff6b35; margin-right: 8px; }
-        
-        .cta-section { padding: 120px 20px; text-align: center; background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%); }
-        .cta-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
-        .cta-subtitle { color: #888; margin-bottom: 40px; }
-        
-        footer { padding: 40px 20px; text-align: center; color: #666; font-size: 14px; border-top: 1px solid #1a1a2e; }
-        footer a { color: #ff6b35; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TenantScore™ | Enterprise Security</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--bg2:#0f0f12;--bg3:#18181b;--border:#27272a;--border2:#3f3f46;--text:#fafafa;--text2:#a1a1aa;--text3:#71717a;--accent:#ff8c00;--gradient:linear-gradient(135deg,#ff8c00,#00d4ff)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(9,9,11,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;text-decoration:none;color:var(--text)}
+.nav-logo .icon{width:32px;height:32px;background:var(--gradient);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.9rem;font-weight:500;transition:color 0.3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--gradient);color:#000!important;padding:8px 20px;border-radius:8px;font-weight:600!important}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 2rem 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(#ff8c00,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-content{max-width:900px;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(#ff8c00,0.1);border:1px solid rgba(#ff8c00,0.2);border-radius:100px;font-size:0.85rem;color:var(--accent);margin-bottom:2rem}
+.hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-0.03em}
+.hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.25rem;color:var(--text2);max-width:650px;margin:0 auto 2.5rem}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.3s;border:none;cursor:pointer}
+.btn-primary{background:var(--gradient);color:#000}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(#ff8c00,0.3)}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{display:flex;justify-content:center;gap:60px;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border)}
+.hero-stat .value{font-size:2rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stat .label{color:var(--text3);font-size:0.85rem;margin-top:4px}
+.trusted{padding:60px 2rem;text-align:center;border-bottom:1px solid var(--border)}
+.trusted p{color:var(--text3);font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:2rem}
+.trusted-logos{display:flex;justify-content:center;gap:60px;flex-wrap:wrap;opacity:0.4}
+.trusted-logo{font-size:1.5rem;font-weight:700;color:var(--text3)}
+.features{padding:120px 2rem;max-width:1200px;margin:0 auto}
+.section-label{display:inline-block;padding:4px 12px;background:rgba(#ff8c00,0.1);border:1px solid rgba(#ff8c00,0.2);border-radius:100px;font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:1rem}
+.section-title{font-size:2.5rem;font-weight:800;margin-bottom:1rem;letter-spacing:-0.02em}
+.section-subtitle{color:var(--text2);font-size:1.1rem;max-width:600px;margin-bottom:4rem}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all 0.3s}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.feature-icon{width:48px;height:48px;background:rgba(#ff8c00,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+.feature-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem}
+.feature-card p{color:var(--text2);font-size:0.9rem;line-height:1.6}
+.pricing{padding:120px 2rem;background:var(--bg2);border-top:1px solid var(--border)}
+.pricing-content{max-width:1100px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:4rem}
+.price-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:2.5rem;position:relative;transition:all 0.3s}
+.price-card:hover{transform:translateY(-4px)}
+.price-card.featured{border-color:var(--accent);box-shadow:0 0 40px rgba(#ff8c00,0.1)}
+.price-card.featured::before{content:'MAS POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#000;padding:4px 16px;border-radius:100px;font-size:0.7rem;font-weight:700}
+.price-card h3{font-size:1.2rem;margin-bottom:0.5rem}
+.price-card .price{font-size:3rem;font-weight:900;margin:1rem 0}
+.price-card .price span{font-size:1rem;font-weight:400;color:var(--text3)}
+.price-card ul{list-style:none;margin:2rem 0}
+.price-card li{padding:8px 0;color:var(--text2);font-size:0.9rem;display:flex;align-items:center;gap:10px}
+.price-card li::before{content:'✓';color:var(--accent);font-weight:700}
+.testimonials{padding:120px 2rem;max-width:1200px;margin:0 auto}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:4rem}
+.testimonial-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.testimonial-card .stars{color:#ffa500;margin-bottom:1rem}
+.testimonial-card p{color:var(--text2);font-size:0.95rem;line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:700;color:#000}
+.testimonial-name{font-weight:600;font-size:0.9rem}
+.testimonial-role{color:var(--text3);font-size:0.8rem}
+.cta{padding:120px 2rem;text-align:center;position:relative}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(#ff8c00,0.1) 0%,transparent 70%);pointer-events:none}
+.cta h2{font-size:3rem;font-weight:900;margin-bottom:1rem}
+.cta p{color:var(--text2);font-size:1.2rem;margin-bottom:2rem}
+.footer{padding:60px 2rem;border-top:1px solid var(--border);background:var(--bg2)}
+.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand p{color:var(--text3);font-size:0.9rem;margin-top:1rem}
+.footer-col h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:1rem}
+.footer-col a{display:block;color:var(--text2);text-decoration:none;font-size:0.9rem;padding:4px 0;transition:color 0.3s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:2rem auto 0;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;color:var(--text3);font-size:0.85rem}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.fade-in{opacity:0;transform:translateY(30px);transition:all 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.features-grid,.pricing-grid,.testimonial-grid{grid-template-columns:1fr}.hero-stats{flex-direction:column;gap:2rem}.footer-content{grid-template-columns:1fr}}</style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <span class="badge">🏠 PropTech Tool</span>
-            <h1>Verificación Automática de Inquilinos</h1>
-            <p class="subtitle">Analiza y evalúa inquilinos potenciales en segundos. Reduce riesgos y toma mejores decisiones.</p>
-            <div class="cta-group">
-                <a href="https://0xvanguard.github.io/tenant-screening-ai" class="btn btn-primary">🔍 Probar Ahora</a>
-                <a href="https://github.com/0xvanguard/tenant-screening-ai" class="btn btn-secondary">📁 GitHub</a>
-            </div>
-            <div class="stats">
-                <div class="stat"><div class="stat-value">95%</div><div class="stat-label">Precisión</div></div>
-                <div class="stat"><div class="stat-value">3s</div><div class="stat-label">Tiempo de Análisis</div></div>
-                <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Automático</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features">
-        <h2 class="section-title">¿Qué analiza?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3 class="feature-title">Ratio Ingreso/Renta</h3>
-                <p class="feature-desc">Calcula automáticamente si el inquilino puede pagar la renta.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏢</div>
-                <h3 class="feature-title">Estabilidad Laboral</h3>
-                <p class="feature-desc">Analiza tipo de empleo, duración y empleador.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚠️</div>
-                <h3 class="feature-title">Red Flags</h3>
-                <p class="feature-desc">Detecta historial de desalojo, crédito bajo, empleo inestable.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">✅</div>
-                <h3 class="feature-title">Factores Positivos</h3>
-                <p class="feature-desc">Resalta fortalezas del inquilino para la decisión.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📋</div>
-                <h3 class="feature-title">Condiciones</h3>
-                <p class="feature-desc">Genera condiciones automáticas de aprobación.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">Score de Riesgo</h3>
-                <p class="feature-desc">Puntuación de 0-100 con 4 niveles de riesgo.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="how-it-works">
-        <h2 class="section-title">¿Cómo funciona?</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3 class="step-title">Ingresa Datos</h3>
-                <p class="step-desc">Nombre, ingresos, empleo, crédito</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3 class="step-title">Análisis IA</h3>
-                <p class="step-desc">El algoritmo evalúa en 3 segundos</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3 class="step-title">Recomendación</h3>
-                <p class="step-desc">Aprobar, revisar o rechazar</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="pricing">
-        <h2 class="section-title">Planes</h2>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3 class="pricing-name">Starter</h3>
-                <div class="pricing-price">Gratis</div>
-                <ul class="pricing-features">
-                    <li>10 análisis/mes</li>
-                    <li>Análisis básico</li>
-                    <li>Web UI</li>
-                    <li>Open source</li>
-                </ul>
-                <a href="https://github.com/0xvanguard/tenant-screening-ai" class="btn btn-secondary" style="width: 100%; justify-content: center;">Descargar</a>
-            </div>
-            <div class="pricing-card popular">
-                <span class="badge" style="position: absolute; top: -12px; right: 20px;">POPULAR</span>
-                <h3 class="pricing-name">Pro</h3>
-                <div class="pricing-price">$49<span>/mes</span></div>
-                <ul class="pricing-features">
-                    <li>Análisis ilimitados</li>
-                    <li>Reportes PDF</li>
-                    <li>Integración API</li>
-                    <li>Soporte prioritario</li>
-                </ul>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center;">Empezar Ahora</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- 🎯 DEMO INTERACTIVO -->
-    <section class="demo-section" id="demo">
-        <div class="container">
-            <div id="tenant-demo"></div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2 class="cta-title">¿Listo para automatizar?</h2>
-        <p class="cta-subtitle">Ahorra tiempo y reduce riesgos con verificación automática.</p>
-        <a href="https://github.com/0xvanguard/tenant-screening-ai" class="btn btn-primary">🚀 Empezar Ahora</a>
-    </section>
-
-    <footer>
-        <p>© 2026 Tenant Screening AI. Desarrollado por <a href="https://github.com/0xvanguard">0xvanguard</a></p>
-    </footer>
-<!-- 🎯 FREEBUFF DEMO SYSTEM -->
+<nav class="nav"><a href="#" class="nav-logo"><span class="icon">🏠</span> TenantScore™</a><div class="nav-links"><a href="#features">Features</a><a href="#pricing">Precios</a><a href="#demo">Demo</a><a href="#" class="nav-cta">Empezar Gratis</a></div></nav>
+<section class="hero"><div class="hero-content"><div class="hero-badge"><span class="dot"></span> Plataforma #1 en LATAM</div><h1>TenantScore™<br><span class="gradient">Evaluación Inteligente de Inquilinos</span></h1><p>Solución enterprise utilizada por las principales empresas de Latinoamérica.</p><div class="hero-actions"><a href="#demo" class="btn btn-primary">🎮 Probar Demo Gratis</a><a href="#" class="btn btn-secondary">📄 Documentación</a></div><div class="hero-stats"><div class="hero-stat"><div class="value">98.5%</div><div class="label">Precisión</div></div><div class="hero-stat"><div class="value"><3s</div><div class="label">Velocidad</div></div><div class="hero-stat"><div class="value">500K+</div><div class="label">Clientes</div></div><div class="hero-stat"><div class="value">99.9%</div><div class="label">Uptime</div></div></div></div></section>
+<section class="trusted"><p>Utilizado por empresas líderes en LATAM</p><div class="trusted-logos"><span class="trusted-logo">Nubank</span><span class="trusted-logo">MercadoLibre</span><span class="trusted-logo">Rappi</span><span class="trusted-logo">Kavak</span><span class="trusted-logo">Bitso</span></div></section>
+<section class="features" id="features"><div class="section-label">Features</div><h2 class="section-title">Todo lo que necesitas</h2><p class="section-subtitle">Funcionalidades enterprise para proteger y optimizar tu negocio.</p><div class="features-grid"><div class="feature-card fade-in"><div class="feature-icon">⚡</div><h3>Score de Riesgo AI</h3><p>Algoritmo que analiza 50+ variables para predecir fiabilidad</p></div>
+<div class="feature-card fade-in"><div class="feature-icon">💳</div><h3>Historial Crediticio</h3><p>Verificación automática con burós de crédito LATAM</p></div>
+<div class="feature-card fade-in"><div class="feature-icon">🧠</div><h3>Análisis de Comportamiento</h3><p>Patrones de pago y comportamiento predictivo</p></div>
+<div class="feature-card fade-in"><div class="feature-icon">📋</div><h3>Reportes Automáticos</h3><p>PDFs profesionales listos para compartir</p></div>
+<div class="feature-card fade-in"><div class="feature-icon">🔗</div><h3>Integración API</h3><p>Conecta con tu CRM inmobiliario favorito</p></div>
+<div class="feature-card fade-in"><div class="feature-icon">⚖️</div><h3>Cumplimiento Legal</h3><p>Cumple con leyes de protección de datos de cada país</p></div>
+</div></section>
+<section id="demo" style="padding:120px 2rem;max-width:900px;margin:0 auto"><div class="section-label">Demo Interactivo</div><h2 class="section-title">Prueba gratis ahora</h2><p class="section-subtitle">10 minutos de uso ilimitado. Sin tarjeta de crédito.</p><div id="app-demo"></div></section>
+<section class="pricing" id="pricing"><div class="pricing-content"><div class="section-label">Precios</div><h2 class="section-title">Planes flexibles</h2><div class="pricing-grid"><div class="price-card"><h3>Starter</h3><p style="color:var(--text3);font-size:0.9rem">Para empezar</p><div class="price">$49<span>/mes</span></div><ul><li>10,000 requests/mes</li><li>Soporte email</li><li>1 usuario</li></ul><a href="#" class="btn btn-secondary" style="width:100%;justify-content:center">Empezar</a></div><div class="price-card featured"><h3>Professional</h3><p style="color:var(--text3);font-size:0.9rem">Para empresas</p><div class="price" style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$149<span style="-webkit-text-fill-color:var(--text3)">/mes</span></div><ul><li>500,000 requests/mes</li><li>Dashboard analytics</li><li>Soporte 24/7</li><li>10 usuarios</li></ul><a href="#" class="btn btn-primary" style="width:100%;justify-content:center">Empezar Ahora</a></div><div class="price-card"><h3>Enterprise</h3><p style="color:var(--text3);font-size:0.9rem">Personalizado</p><div class="price">Custom</div><ul><li>Ilimitado</li><li>On-premise</li><li>SLA 99.99%</li><li>Ingeniero dedicado</li></ul><a href="#" class="btn btn-secondary" style="width:100%;justify-content:center">Contactar</a></div></div></div></section>
+<section class="testimonials"><div class="section-label">Testimonios</div><h2 class="section-title">Lo que dicen nuestros clientes</h2><div class="testimonial-grid"><div class="testimonial-card fade-in"><div class="stars">★★★★★</div><p>"TenantScore nos ahorró 3 inquilinos problemáticos en el primer mes. ROI increíble."</p><div class="testimonial-author"><div class="testimonial-avatar">MT</div><div><div class="testimonial-name">María Torres</div><div class="testimonial-role">VP Real Estate Corp</div></div></div></div>
+<div class="testimonial-card fade-in"><div class="stars">★★★★★</div><p>"El score predictivo es sorprendentemente preciso. Recomiendo 100%."</p><div class="testimonial-author"><div class="testimonial-avatar">RD</div><div><div class="testimonial-name">Roberto Díaz</div><div class="testimonial-role">Director InmobiliariaLA</div></div></div></div>
+<div class="testimonial-card fade-in"><div class="stars">★★★★★</div><p>"Excelente producto. La integración fue súper fácil y el soporte es increíble."</p><div class="testimonial-author"><div class="testimonial-avatar">JR</div><div><div class="testimonial-name">Jorge Ramírez</div><div class="testimonial-role">CTO, StartupMX</div></div></div></div></div></section>
+<section class="cta"><h2>Empieza hoy con <span class="gradient">TenantScore™</span></h2><p>10 minutos de demo gratis. Sin tarjeta de crédito.</p><a href="#demo" class="btn btn-primary" style="font-size:1.1rem;padding:16px 36px">🎮 Probar Gratis</a></section>
+<footer class="footer"><div class="footer-content"><div class="footer-brand"><a href="#" class="nav-logo"><span class="icon">🏠</span> TenantScore™</a><p>Solución enterprise para LATAM.</p></div><div class="footer-col"><h4>Producto</h4><a href="#">Features</a><a href="#">Precios</a><a href="#">API</a></div><div class="footer-col"><h4>Empresa</h4><a href="#">Blog</a><a href="#">Carreras</a><a href="#">Contacto</a></div><div class="footer-col"><h4>Legal</h4><a href="#">Privacidad</a><a href="#">Términos</a></div></div><div class="footer-bottom"><span>© 2026 TenantScore™ by 0xvanguard</span><span>Hecho en LATAM ❤️</span></div></footer>
 <script src="demo-app.js"></script>
 <script src="demo.js"></script>
-<script>
-    const DEMO_CONFIG = {id:"tenant-screening",name:"Tenant Screening AI",options:{upgradeUrl:"https://github.com/0xvanguard/tenant-screening-ai",proPrice:"$59/mes"}};
-</script>
-</body>
-</html>
+<script>const DEMO_CONFIG = {"id":"tenant-screening-ai","name":"TenantScore™","options":{"upgradeUrl":"#pricing","proPrice":"$59/mes"}};const observer = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));</script>
+</body></html>
